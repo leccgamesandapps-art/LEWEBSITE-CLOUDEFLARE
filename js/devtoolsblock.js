@@ -1,8 +1,15 @@
-// ===== LEWEBSITE - Improved DevTools Protection =====
-// Stronger client-side protection against inspecting / stealing code
+// ===== LEWEBSITE - DevTools Protection (Fixed) =====
+// Only active on desktop/laptop — disabled on mobile
 
 (function () {
   "use strict";
+
+  // Detect if device is mobile
+  var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+    || (window.innerWidth <= 800 && window.innerHeight <= 900);
+
+  // If mobile → do nothing (exit script)
+  if (isMobile) return;
 
   // ================================
   // 1. Disable right-click
@@ -44,7 +51,7 @@
       return false;
     }
 
-    // Ctrl+Shift+K (Firefox Console)
+    // Ctrl+Shift+K (Firefox)
     if (e.ctrlKey && e.shiftKey && e.keyCode === 75) {
       e.preventDefault();
       e.stopPropagation();
@@ -53,7 +60,7 @@
   }, true);
 
   // ================================
-  // 3. Show warning screen
+  // 3. Warning screen
   // ================================
   function showWarning() {
     document.documentElement.innerHTML = `
@@ -77,22 +84,9 @@
             text-align: center;
             padding: 20px;
           }
-          h1 {
-            color: #f1c40f;
-            font-size: 28px;
-            margin-bottom: 20px;
-          }
-          p {
-            font-size: 16px;
-            max-width: 420px;
-            line-height: 1.6;
-            color: #ccc;
-          }
-          .note {
-            margin-top: 30px;
-            font-size: 13px;
-            color: #888;
-          }
+          h1 { color: #f1c40f; font-size: 28px; margin-bottom: 20px; }
+          p { font-size: 16px; max-width: 420px; line-height: 1.6; color: #ccc; }
+          .note { margin-top: 30px; font-size: 13px; color: #888; }
         </style>
       </head>
       <body>
@@ -109,7 +103,7 @@
   }
 
   // ================================
-  // 4. Detect DevTools by size
+  // 4. Detect DevTools by size (Desktop only)
   // ================================
   var threshold = 160;
   var alreadyBlocked = false;
@@ -124,7 +118,7 @@
     }
   }
 
-  setInterval(checkSize, 400);
+  setInterval(checkSize, 500);
 
   // ================================
   // 5. Debugger detection
@@ -136,28 +130,10 @@
       alreadyBlocked = true;
       showWarning();
     }
-  }, 1200);
+  }, 1500);
 
   // ================================
-  // 6. Console detection (basic)
-  // ================================
-  var element = new Image();
-  Object.defineProperty(element, "id", {
-    get: function () {
-      if (!alreadyBlocked) {
-        alreadyBlocked = true;
-        showWarning();
-      }
-    }
-  });
-
-  setInterval(function () {
-    console.log(element);
-    console.clear();
-  }, 2000);
-
-  // ================================
-  // 7. Disable text selection & drag
+  // 6. Disable text selection & drag
   // ================================
   document.addEventListener("selectstart", function (e) {
     e.preventDefault();
