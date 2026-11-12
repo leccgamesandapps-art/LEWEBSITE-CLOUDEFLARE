@@ -1,99 +1,172 @@
-// ===== LEWEBSITE DevTools Blocker =====
-// Basic protection against opening browser DevTools
+// ===== LEWEBSITE - Improved DevTools Protection =====
+// Stronger client-side protection against inspecting / stealing code
 
 (function () {
   "use strict";
 
-  // Disable right-click
+  // ================================
+  // 1. Disable right-click
+  // ================================
   document.addEventListener("contextmenu", function (e) {
     e.preventDefault();
     return false;
   });
 
-  // Disable common DevTools shortcuts
+  // ================================
+  // 2. Block keyboard shortcuts
+  // ================================
   document.addEventListener("keydown", function (e) {
     // F12
-    if (e.key === "F12") {
+    if (e.keyCode === 123 || e.key === "F12") {
       e.preventDefault();
       e.stopPropagation();
       return false;
     }
 
-    // Ctrl+Shift+I / Ctrl+Shift+J / Ctrl+Shift+C
-    if (e.ctrlKey && e.shiftKey && (e.key === "I" || e.key === "i" || e.key === "J" || e.key === "j" || e.key === "C" || e.key === "c")) {
+    // Ctrl+Shift+I / J / C
+    if (e.ctrlKey && e.shiftKey && [73, 74, 67].includes(e.keyCode)) {
       e.preventDefault();
       e.stopPropagation();
       return false;
     }
 
     // Ctrl+U (View Source)
-    if (e.ctrlKey && (e.key === "U" || e.key === "u")) {
+    if (e.ctrlKey && e.keyCode === 85) {
       e.preventDefault();
       e.stopPropagation();
       return false;
     }
 
-    // Ctrl+S (Save Page)
-    if (e.ctrlKey && (e.key === "S" || e.key === "s")) {
+    // Ctrl+S (Save)
+    if (e.ctrlKey && e.keyCode === 83) {
       e.preventDefault();
       e.stopPropagation();
       return false;
     }
-  });
 
-  // Detect DevTools by window size difference
-  var threshold = 160;
-  var devtoolsOpen = false;
-
-  function checkDevTools() {
-    var widthThreshold = window.outerWidth - window.innerWidth > threshold;
-    var heightThreshold = window.outerHeight - window.innerHeight > threshold;
-
-    if (widthThreshold || heightThreshold) {
-      if (!devtoolsOpen) {
-        devtoolsOpen = true;
-        handleDevToolsOpen();
-      }
-    } else {
-      devtoolsOpen = false;
+    // Ctrl+Shift+K (Firefox Console)
+    if (e.ctrlKey && e.shiftKey && e.keyCode === 75) {
+      e.preventDefault();
+      e.stopPropagation();
+      return false;
     }
-  }
+  }, true);
 
-  function handleDevToolsOpen() {
-    // Clear the page and show warning
-    document.body.innerHTML = `
-      <div style="
-        display:flex;
-        flex-direction:column;
-        justify-content:center;
-        align-items:center;
-        height:100vh;
-        background:#1a1a1a;
-        color:#fff;
-        font-family:Arial,sans-serif;
-        text-align:center;
-        padding:20px;
-      ">
-        <h1 style="color:#f1c40f;margin-bottom:20px;">Access Restricted</h1>
-        <p style="font-size:18px;max-width:400px;line-height:1.5;">
+  // ================================
+  // 3. Show warning screen
+  // ================================
+  function showWarning() {
+    document.documentElement.innerHTML = `
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Access Restricted</title>
+        <style>
+          body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: #111;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+          }
+          h1 {
+            color: #f1c40f;
+            font-size: 28px;
+            margin-bottom: 20px;
+          }
+          p {
+            font-size: 16px;
+            max-width: 420px;
+            line-height: 1.6;
+            color: #ccc;
+          }
+          .note {
+            margin-top: 30px;
+            font-size: 13px;
+            color: #888;
+          }
+        </style>
+      </head>
+      <body>
+        <h1>Access Restricted</h1>
+        <p>
           Developer tools are not allowed on this website.<br><br>
+          This site and its content are protected by copyright.<br>
           Please close DevTools and refresh the page.
         </p>
-      </div>
+        <p class="note">LEWEBSITE © 2026 • All Rights Reserved</p>
+      </body>
+      </html>
     `;
   }
 
-  // Check every 500ms
-  setInterval(checkDevTools, 500);
+  // ================================
+  // 4. Detect DevTools by size
+  // ================================
+  var threshold = 160;
+  var alreadyBlocked = false;
 
-  // Also try debugger detection (works in some browsers)
+  function checkSize() {
+    var widthDiff = window.outerWidth - window.innerWidth > threshold;
+    var heightDiff = window.outerHeight - window.innerHeight > threshold;
+
+    if ((widthDiff || heightDiff) && !alreadyBlocked) {
+      alreadyBlocked = true;
+      showWarning();
+    }
+  }
+
+  setInterval(checkSize, 400);
+
+  // ================================
+  // 5. Debugger detection
+  // ================================
   setInterval(function () {
     var start = performance.now();
     debugger;
-    var end = performance.now();
-    if (end - start > 100) {
-      handleDevToolsOpen();
+    if (performance.now() - start > 100 && !alreadyBlocked) {
+      alreadyBlocked = true;
+      showWarning();
     }
-  }, 1000);
+  }, 1200);
+
+  // ================================
+  // 6. Console detection (basic)
+  // ================================
+  var element = new Image();
+  Object.defineProperty(element, "id", {
+    get: function () {
+      if (!alreadyBlocked) {
+        alreadyBlocked = true;
+        showWarning();
+      }
+    }
+  });
+
+  setInterval(function () {
+    console.log(element);
+    console.clear();
+  }, 2000);
+
+  // ================================
+  // 7. Disable text selection & drag
+  // ================================
+  document.addEventListener("selectstart", function (e) {
+    e.preventDefault();
+    return false;
+  });
+
+  document.addEventListener("dragstart", function (e) {
+    e.preventDefault();
+    return false;
+  });
 
 })();
