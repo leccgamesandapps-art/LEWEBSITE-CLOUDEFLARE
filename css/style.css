@@ -92,15 +92,15 @@ body {
   z-index: 100;
   background: rgba(0, 0, 0, 0.55);
   border-bottom: 4px solid var(--dark-green);
-  padding: 12px 10px;
+  padding: 10px 8px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
 }
 
 .logo {
-  font-size: 16px;
+  font-size: 15px;
   color: var(--gold);
   text-shadow: 3px 3px 0 #000;
   letter-spacing: 1px;
@@ -108,26 +108,26 @@ body {
 
 .nav {
   display: flex;
-  flex-wrap: nowrap;          /* Force single row */
+  flex-wrap: nowrap;
   justify-content: center;
-  gap: 6px;
+  gap: 4px;
   width: 100%;
-  max-width: 360px;
 }
 
 .nav-btn {
   font-family: 'Press Start 2P', cursive;
-  font-size: 9px;
+  font-size: 8px;
   color: #fff;
   text-decoration: none;
-  padding: 7px 8px;
+  padding: 6px 6px;
   background: var(--stone);
-  border: 3px solid #444;
+  border: 2px solid #444;
   box-shadow: 2px 2px 0 #222;
   transition: 0.15s;
   white-space: nowrap;
-  flex: 1;
+  flex: 1 1 0;
   text-align: center;
+  min-width: 0;
 }
 
 .nav-btn:hover,
@@ -357,7 +357,6 @@ body {
 
   .nav {
     gap: 10px;
-    max-width: none;
   }
 
   .nav-btn {
