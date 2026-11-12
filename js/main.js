@@ -1,4 +1,4 @@
-// Basic Minecraft Style Website Scripts
+// LEWEBSITE - Single Page Navigation
 
 function createParticles() {
   const container = document.getElementById('particles');
@@ -13,18 +13,69 @@ function createParticles() {
   }
 }
 
-function setupButtons() {
-  const aboutBtn = document.getElementById('aboutBtn');
-  const projectsBtn = document.getElementById('projectsBtn');
+function showSection(sectionId) {
+  // Hide all sections
+  document.querySelectorAll('.page-section').forEach(sec => {
+    sec.classList.remove('active');
+  });
+
+  // Show target section
+  const target = document.getElementById(sectionId);
+  if (target) {
+    target.classList.add('active');
+  }
+
+  // Update nav active state
+  document.querySelectorAll('.nav-btn').forEach(btn => {
+    btn.classList.remove('active');
+    if (btn.getAttribute('data-section') === sectionId) {
+      btn.classList.add('active');
+    }
+  });
+
+  // Update URL hash without jumping
+  history.replaceState(null, null, '#' + sectionId);
+}
+
+function setupNavigation() {
+  // Nav buttons
+  document.querySelectorAll('.nav-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const section = btn.getAttribute('data-section');
+      showSection(section);
+    });
+  });
+
+  // Also handle normal <a href="#..."> links
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      const hash = link.getAttribute('href').substring(1);
+      if (document.getElementById(hash)) {
+        e.preventDefault();
+        showSection(hash);
+      }
+    });
+  });
+
+  // On page load, check URL hash
+  const hash = window.location.hash.substring(1);
+  if (hash && document.getElementById(hash)) {
+    showSection(hash);
+  } else {
+    showSection('main');
+  }
+
+  // Handle browser back/forward
+  window.addEventListener('hashchange', () => {
+    const newHash = window.location.hash.substring(1) || 'main';
+    showSection(newHash);
+  });
+}
+
+function setupBlock() {
   const block = document.getElementById('floatingBlock');
-
-  aboutBtn.addEventListener('click', () => {
-    alert('About section coming soon');
-  });
-
-  projectsBtn.addEventListener('click', () => {
-    alert('Projects section coming soon');
-  });
+  if (!block) return;
 
   block.addEventListener('click', () => {
     block.style.animation = 'none';
@@ -36,7 +87,7 @@ function setupButtons() {
   });
 }
 
-// Shake animation
+// Shake keyframes
 const style = document.createElement('style');
 style.textContent = `
   @keyframes shake {
@@ -49,5 +100,6 @@ document.head.appendChild(style);
 
 document.addEventListener('DOMContentLoaded', () => {
   createParticles();
-  setupButtons();
+  setupNavigation();
+  setupBlock();
 });

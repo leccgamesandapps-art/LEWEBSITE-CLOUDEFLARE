@@ -21,49 +21,95 @@
   <header class="header">
     <div class="logo">LEWEBSITE</div>
     <nav class="nav">
-      <a href="#" class="nav-btn">Home</a>
-      <a href="#" class="nav-btn">About</a>
-      <a href="#" class="nav-btn">Projects</a>
-      <a href="#" class="nav-btn">Contact</a>
+      <a href="#main" class="nav-btn active" data-section="main">Home</a>
+      <a href="#aboutus" class="nav-btn" data-section="aboutus">About</a>
+      <a href="#projects" class="nav-btn" data-section="projects">Projects</a>
+      <a href="#contact" class="nav-btn" data-section="contact">Contact</a>
     </nav>
   </header>
 
-  <!-- Hero Section -->
-  <main class="hero">
-    <div class="hero-content">
-      <h1 class="title">Welcome to<br>LEWEBSITE</h1>
-      <p class="subtitle">A simple Minecraft-style personal website</p>
+  <!-- ========== MAIN SECTION ========== -->
+  <section id="main" class="page-section active">
+    <div class="hero">
+      <div class="hero-content">
+        <h1 class="title">Welcome to<br>LEWEBSITE</h1>
+        <p class="subtitle">A simple Minecraft-style personal website</p>
 
-      <div class="btn-group">
-        <button class="mc-btn primary" id="aboutBtn">About Me</button>
-        <button class="mc-btn secondary" id="projectsBtn">View Projects</button>
+        <div class="btn-group">
+          <a href="#aboutus" class="mc-btn primary">About Me</a>
+          <a href="#projects" class="mc-btn secondary">View Projects</a>
+        </div>
+      </div>
+
+      <div class="floating-block" id="floatingBlock">
+        <div class="block-face top"></div>
+        <div class="block-face front"></div>
+        <div class="block-face side"></div>
       </div>
     </div>
 
-    <!-- Floating Block -->
-    <div class="floating-block" id="floatingBlock">
-      <div class="block-face top"></div>
-      <div class="block-face front"></div>
-      <div class="block-face side"></div>
+    <div class="features">
+      <div class="card">
+        <div class="card-icon">📦</div>
+        <h3>Simple Design</h3>
+        <p>Clean and blocky layout inspired by Minecraft</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🎨</div>
+        <h3>Pixel Style</h3>
+        <p>Classic pixel font and Minecraft colors</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">⚡</div>
+        <h3>Lightweight</h3>
+        <p>Fast and easy to customize anytime</p>
+      </div>
     </div>
-  </main>
+  </section>
 
-  <!-- Features / Cards -->
-  <section class="features">
-    <div class="card">
-      <div class="card-icon">📦</div>
-      <h3>Simple Design</h3>
-      <p>Clean and blocky layout inspired by Minecraft</p>
+  <!-- ========== ABOUT US SECTION ========== -->
+  <section id="aboutus" class="page-section">
+    <div class="section-inner">
+      <h2 class="section-title">About Us</h2>
+      <div class="about-box">
+        <p>Welcome to LEWEBSITE.</p>
+        <p>This is a basic Minecraft-style website made for fun and learning.</p>
+        <p>We love simple designs, pixel fonts, and blocky vibes.</p>
+        <p>More content coming soon...</p>
+      </div>
     </div>
-    <div class="card">
-      <div class="card-icon">🎨</div>
-      <h3>Pixel Style</h3>
-      <p>Classic pixel font and Minecraft colors</p>
+  </section>
+
+  <!-- ========== PROJECTS SECTION ========== -->
+  <section id="projects" class="page-section">
+    <div class="section-inner">
+      <h2 class="section-title">Projects</h2>
+      <div class="projects-grid">
+        <div class="project-card">
+          <h3>Project 1</h3>
+          <p>Coming soon</p>
+        </div>
+        <div class="project-card">
+          <h3>Project 2</h3>
+          <p>Coming soon</p>
+        </div>
+        <div class="project-card">
+          <h3>Project 3</h3>
+          <p>Coming soon</p>
+        </div>
+      </div>
     </div>
-    <div class="card">
-      <div class="card-icon">⚡</div>
-      <h3>Lightweight</h3>
-      <p>Fast and easy to customize anytime</p>
+  </section>
+
+  <!-- ========== CONTACT SECTION ========== -->
+  <section id="contact" class="page-section">
+    <div class="section-inner">
+      <h2 class="section-title">Contact</h2>
+      <div class="contact-box">
+        <p>Want to say hello?</p>
+        <p>Email: <span class="highlight">leccgamesandapps@gmail.com</span></p>
+        <p>More contact options coming soon.</p>
+      </div>
     </div>
   </section>
 
