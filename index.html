@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LEWEBSITE | Minecraft Style</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- Animated Background -->
+  <div class="bg-sky"></div>
+  <div class="bg-clouds"></div>
+  <div class="bg-dirt"></div>
+  <div class="particles" id="particles"></div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="logo pixel-text">LEWEBSITE</div>
+    <nav class="nav">
+      <a href="#" class="nav-btn">Home</a>
+      <a href="#" class="nav-btn">Worlds</a>
+      <a href="#" class="nav-btn">Players</a>
+      <a href="#" class="nav-btn">Join</a>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <main class="hero">
+    <div class="hero-content">
+      <h1 class="pixel-text title">Welcome to the<br>Social Block</h1>
+      <p class="subtitle">A Minecraft-inspired social web experience</p>
+
+      <div class="btn-group">
+        <button class="mc-btn primary" id="exploreBtn">Explore Worlds</button>
+        <button class="mc-btn secondary" id="joinBtn">Join Server</button>
+      </div>
+    </div>
+
+    <!-- Floating Block -->
+    <div class="floating-block" id="floatingBlock">
+      <div class="block-face top"></div>
+      <div class="block-face front"></div>
+      <div class="block-face side"></div>
+    </div>
+  </main>
+
+  <!-- Features / Cards -->
+  <section class="features">
+    <div class="card" data-anim="bounce">
+      <div class="card-icon">⛏</div>
+      <h3 class="pixel-text">Mine & Build</h3>
+      <p>Create your own social spaces block by block</p>
+    </div>
+    <div class="card" data-anim="bounce">
+      <div class="card-icon">🛡</div>
+      <h3 class="pixel-text">Safe Worlds</h3>
+      <p>Protected communities with real players</p>
+    </div>
+    <div class="card" data-anim="bounce">
+      <div class="card-icon">⚡</div>
+      <h3 class="pixel-text">Live Events</h3>
+      <p>Join raids, builds and hangouts daily</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p class="pixel-text small">LEWEBSITE © 2026 • Made for Minecraft fans</p>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

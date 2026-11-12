@@ -1,0 +1,348 @@
+/* ===== Minecraft Theme - LEWEBSITE ===== */
+
+:root {
+  --mc-green: #5d9c3d;
+  --mc-dark-green: #3a6b24;
+  --mc-dirt: #8b5a2b;
+  --mc-stone: #7a7a7a;
+  --mc-dark: #1a1a1a;
+  --mc-sky: #7ec8f0;
+  --mc-cloud: #ffffff;
+  --mc-gold: #f1c40f;
+  --mc-diamond: #55ffff;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Press Start 2P', cursive;
+  background: var(--mc-sky);
+  color: #fff;
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* ===== Background Layers ===== */
+.bg-sky {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(to bottom, #5dade2 0%, #85c1e9 40%, #aed6f1 70%, #d5f5e3 100%);
+  z-index: -4;
+}
+
+.bg-clouds {
+  position: fixed;
+  inset: 0;
+  background-image: 
+    radial-gradient(ellipse 120px 40px at 20% 20%, rgba(255,255,255,0.85) 0%, transparent 70%),
+    radial-gradient(ellipse 180px 50px at 60% 15%, rgba(255,255,255,0.7) 0%, transparent 70%),
+    radial-gradient(ellipse 100px 35px at 85% 25%, rgba(255,255,255,0.8) 0%, transparent 70%);
+  animation: cloudMove 60s linear infinite;
+  z-index: -3;
+}
+
+@keyframes cloudMove {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-200px); }
+}
+
+.bg-dirt {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 180px;
+  background: 
+    repeating-linear-gradient(
+      90deg,
+      #8b5a2b 0px,
+      #8b5a2b 32px,
+      #7a4a22 32px,
+      #7a4a22 64px
+    ),
+    linear-gradient(to top, #5d3a1a 0%, #8b5a2b 60%);
+  border-top: 8px solid #5d9c3d;
+  z-index: -2;
+  box-shadow: inset 0 12px 0 #3a6b24;
+}
+
+/* Particles */
+.particles {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.particle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: #fff;
+  opacity: 0.6;
+  animation: floatUp linear infinite;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(100vh) scale(0.5);
+    opacity: 0;
+  }
+  20% { opacity: 0.7; }
+  100% {
+    transform: translateY(-20px) scale(1);
+    opacity: 0;
+  }
+}
+
+/* ===== Header ===== */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  background: rgba(0,0,0,0.35);
+  border-bottom: 4px solid #3a6b24;
+  position: relative;
+  z-index: 10;
+}
+
+.logo {
+  font-size: 22px;
+  color: var(--mc-gold);
+  text-shadow: 3px 3px 0 #000;
+  letter-spacing: 2px;
+}
+
+.nav {
+  display: flex;
+  gap: 12px;
+}
+
+.nav-btn {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 11px;
+  color: #fff;
+  text-decoration: none;
+  padding: 10px 16px;
+  background: var(--mc-stone);
+  border: 3px solid #555;
+  box-shadow: 3px 3px 0 #333;
+  transition: all 0.15s;
+}
+
+.nav-btn:hover {
+  background: var(--mc-green);
+  border-color: var(--mc-dark-green);
+  transform: translateY(-3px);
+  box-shadow: 3px 6px 0 #222;
+}
+
+.nav-btn:active {
+  transform: translateY(1px);
+  box-shadow: 1px 1px 0 #222;
+}
+
+/* ===== Hero ===== */
+.hero {
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 60px 40px;
+  position: relative;
+  z-index: 5;
+}
+
+.hero-content {
+  max-width: 520px;
+}
+
+.title {
+  font-size: 36px;
+  line-height: 1.4;
+  color: #fff;
+  text-shadow: 4px 4px 0 #000, -2px -2px 0 #3a6b24;
+  margin-bottom: 20px;
+}
+
+.subtitle {
+  font-family: Arial, sans-serif;
+  font-size: 18px;
+  color: #e8f5e9;
+  margin-bottom: 40px;
+  text-shadow: 1px 1px 2px #000;
+}
+
+.btn-group {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+/* Minecraft Buttons */
+.mc-btn {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 13px;
+  padding: 16px 28px;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.12s;
+  text-transform: uppercase;
+}
+
+.mc-btn.primary {
+  background: var(--mc-green);
+  color: #fff;
+  box-shadow: 
+    inset -4px -4px 0 #3a6b24,
+    inset 4px 4px 0 #7dce4a,
+    4px 4px 0 #222;
+}
+
+.mc-btn.secondary {
+  background: var(--mc-dirt);
+  color: #fff;
+  box-shadow: 
+    inset -4px -4px 0 #5d3a1a,
+    inset 4px 4px 0 #a67c52,
+    4px 4px 0 #222;
+}
+
+.mc-btn:hover {
+  transform: translateY(-4px) scale(1.03);
+  filter: brightness(1.1);
+}
+
+.mc-btn:active {
+  transform: translateY(2px);
+  box-shadow: 
+    inset 4px 4px 0 rgba(0,0,0,0.3),
+    1px 1px 0 #222;
+}
+
+/* Floating Block */
+.floating-block {
+  width: 120px;
+  height: 120px;
+  position: relative;
+  transform-style: preserve-3d;
+  animation: floatBlock 4s ease-in-out infinite;
+  cursor: pointer;
+}
+
+@keyframes floatBlock {
+  0%, 100% { transform: translateY(0) rotateY(0deg); }
+  50% { transform: translateY(-25px) rotateY(15deg); }
+}
+
+.block-face {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+}
+
+.block-face.front {
+  background: #7dce4a;
+  border: 4px solid #3a6b24;
+  transform: translateZ(60px);
+}
+
+.block-face.top {
+  background: #5d9c3d;
+  border: 4px solid #3a6b24;
+  transform: rotateX(90deg) translateZ(60px);
+}
+
+.block-face.side {
+  background: #4a8c2e;
+  border: 4px solid #2e5a1a;
+  transform: rotateY(90deg) translateZ(60px);
+}
+
+/* ===== Features ===== */
+.features {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  padding: 40px 20px 100px;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 5;
+}
+
+.card {
+  width: 260px;
+  background: rgba(0,0,0,0.45);
+  border: 4px solid #555;
+  padding: 28px 20px;
+  text-align: center;
+  transition: all 0.2s;
+  box-shadow: 6px 6px 0 rgba(0,0,0,0.4);
+}
+
+.card:hover {
+  transform: translateY(-10px) scale(1.04);
+  border-color: var(--mc-green);
+  box-shadow: 8px 12px 0 rgba(0,0,0,0.5);
+}
+
+.card-icon {
+  font-size: 42px;
+  margin-bottom: 16px;
+}
+
+.card h3 {
+  font-size: 14px;
+  margin-bottom: 12px;
+  color: var(--mc-gold);
+}
+
+.card p {
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #ddd;
+}
+
+/* ===== Footer ===== */
+.footer {
+  text-align: center;
+  padding: 20px;
+  background: rgba(0,0,0,0.5);
+  border-top: 4px solid #3a6b24;
+  position: relative;
+  z-index: 5;
+}
+
+.small {
+  font-size: 10px;
+  color: #aaa;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .title {
+    font-size: 24px;
+  }
+  
+  .hero {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .floating-block {
+    margin-top: 40px;
+  }
+}
