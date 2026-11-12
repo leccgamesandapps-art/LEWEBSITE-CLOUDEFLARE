@@ -1,105 +1,77 @@
-// LEWEBSITE - Single Page Navigation
+// LEWEBSITE Scripts
 
 function createParticles() {
-  const container = document.getElementById('particles');
-  for (let i = 0; i < 22; i++) {
+  const box = document.getElementById('particles');
+  if (!box) return;
+
+  for (let i = 0; i < 18; i++) {
     const p = document.createElement('div');
-    p.classList.add('particle');
+    p.className = 'particle';
     p.style.left = Math.random() * 100 + 'vw';
-    p.style.animationDuration = (7 + Math.random() * 9) + 's';
-    p.style.animationDelay = Math.random() * 7 + 's';
-    p.style.width = p.style.height = (3 + Math.random() * 4) + 'px';
-    container.appendChild(p);
+    p.style.width = p.style.height = (2 + Math.random() * 4) + 'px';
+    p.style.animationDuration = (8 + Math.random() * 10) + 's';
+    p.style.animationDelay = Math.random() * 6 + 's';
+    box.appendChild(p);
   }
 }
 
-function showSection(sectionId) {
-  // Hide all sections
-  document.querySelectorAll('.page-section').forEach(sec => {
-    sec.classList.remove('active');
-  });
+function showSection(id) {
+  document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
+  const target = document.getElementById(id);
+  if (target) target.classList.add('active');
 
-  // Show target section
-  const target = document.getElementById(sectionId);
-  if (target) {
-    target.classList.add('active');
-  }
-
-  // Update nav active state
   document.querySelectorAll('.nav-btn').forEach(btn => {
-    btn.classList.remove('active');
-    if (btn.getAttribute('data-section') === sectionId) {
-      btn.classList.add('active');
-    }
+    btn.classList.toggle('active', btn.dataset.section === id);
   });
 
-  // Update URL hash without jumping
-  history.replaceState(null, null, '#' + sectionId);
+  history.replaceState(null, null, '#' + id);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-function setupNavigation() {
-  // Nav buttons
-  document.querySelectorAll('.nav-btn').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      const section = btn.getAttribute('data-section');
-      showSection(section);
-    });
-  });
+function setupNav() {
+  document.querySelectorAll('.nav-btn, a[href^="#"]').forEach(el => {
+    el.addEventListener('click', e => {
+      const href = el.getAttribute('href');
+      if (!href || !href.startsWith('#')) return;
 
-  // Also handle normal <a href="#..."> links
-  document.querySelectorAll('a[href^="#"]').forEach(link => {
-    link.addEventListener('click', (e) => {
-      const hash = link.getAttribute('href').substring(1);
-      if (document.getElementById(hash)) {
+      const id = href.slice(1);
+      if (document.getElementById(id)) {
         e.preventDefault();
-        showSection(hash);
+        showSection(id);
       }
     });
   });
 
-  // On page load, check URL hash
-  const hash = window.location.hash.substring(1);
-  if (hash && document.getElementById(hash)) {
-    showSection(hash);
-  } else {
-    showSection('main');
-  }
+  const hash = location.hash.slice(1);
+  showSection(hash && document.getElementById(hash) ? hash : 'main');
 
-  // Handle browser back/forward
   window.addEventListener('hashchange', () => {
-    const newHash = window.location.hash.substring(1) || 'main';
-    showSection(newHash);
+    const id = location.hash.slice(1) || 'main';
+    showSection(id);
   });
 }
 
 function setupBlock() {
-  const block = document.getElementById('floatingBlock');
+  const block = document.getElementById('grassBlock');
   if (!block) return;
 
   block.addEventListener('click', () => {
     block.style.animation = 'none';
     block.offsetHeight;
-    block.style.animation = 'floatBlock 0.35s ease, shake 0.35s ease';
+    block.style.animation = 'float 0.3s ease, shake 0.3s ease';
     setTimeout(() => {
-      block.style.animation = 'floatBlock 4.2s ease-in-out infinite';
-    }, 350);
+      block.style.animation = 'float 3.5s ease-in-out infinite';
+    }, 300);
   });
 }
 
-// Shake keyframes
-const style = document.createElement('style');
-style.textContent = `
-  @keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(-6px) rotate(-2deg); }
-    75% { transform: translateX(6px) rotate(2deg); }
-  }
-`;
-document.head.appendChild(style);
+// Shake
+const s = document.createElement('style');
+s.textContent = `@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}`;
+document.head.appendChild(s);
 
 document.addEventListener('DOMContentLoaded', () => {
   createParticles();
-  setupNavigation();
+  setupNav();
   setupBlock();
 });

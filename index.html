@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
   <title>LEWEBSITE | Minecraft Style</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,16 +11,16 @@
 </head>
 <body>
 
-  <!-- Animated Background -->
+  <!-- Background -->
   <div class="bg-sky"></div>
   <div class="bg-clouds"></div>
-  <div class="bg-dirt"></div>
+  <div class="bg-ground"></div>
   <div class="particles" id="particles"></div>
 
   <!-- Header -->
   <header class="header">
     <div class="logo">LEWEBSITE</div>
-    <nav class="nav">
+    <nav class="nav" id="nav">
       <a href="#main" class="nav-btn active" data-section="main">Home</a>
       <a href="#aboutus" class="nav-btn" data-section="aboutus">About</a>
       <a href="#projects" class="nav-btn" data-section="projects">Projects</a>
@@ -28,24 +28,18 @@
     </nav>
   </header>
 
-  <!-- ========== MAIN SECTION ========== -->
+  <!-- MAIN -->
   <section id="main" class="page-section active">
     <div class="hero">
-      <div class="hero-content">
-        <h1 class="title">Welcome to<br>LEWEBSITE</h1>
-        <p class="subtitle">A simple Minecraft-style personal website</p>
+      <h1 class="title">Welcome to<br>LEWEBSITE</h1>
+      <p class="subtitle">A simple Minecraft-style personal website</p>
 
-        <div class="btn-group">
-          <a href="#aboutus" class="mc-btn primary">About Me</a>
-          <a href="#projects" class="mc-btn secondary">View Projects</a>
-        </div>
+      <div class="btn-group">
+        <a href="#aboutus" class="mc-btn primary">About Me</a>
+        <a href="#projects" class="mc-btn secondary">View Projects</a>
       </div>
 
-      <div class="floating-block" id="floatingBlock">
-        <div class="block-face top"></div>
-        <div class="block-face front"></div>
-        <div class="block-face side"></div>
-      </div>
+      <div class="grass-block" id="grassBlock"></div>
     </div>
 
     <div class="features">
@@ -67,22 +61,20 @@
     </div>
   </section>
 
-  <!-- ========== ABOUT US SECTION ========== -->
+  <!-- ABOUT -->
   <section id="aboutus" class="page-section">
-    <div class="section-inner">
+    <div class="section-box">
       <h2 class="section-title">About Us</h2>
-      <div class="about-box">
-        <p>Welcome to LEWEBSITE.</p>
-        <p>This is a basic Minecraft-style website made for fun and learning.</p>
-        <p>We love simple designs, pixel fonts, and blocky vibes.</p>
-        <p>More content coming soon...</p>
-      </div>
+      <p>Welcome to LEWEBSITE.</p>
+      <p>This is a basic Minecraft-style website made for fun and learning.</p>
+      <p>We love simple designs, pixel fonts, and blocky vibes.</p>
+      <p>More content coming soon...</p>
     </div>
   </section>
 
-  <!-- ========== PROJECTS SECTION ========== -->
+  <!-- PROJECTS -->
   <section id="projects" class="page-section">
-    <div class="section-inner">
+    <div class="section-box">
       <h2 class="section-title">Projects</h2>
       <div class="projects-grid">
         <div class="project-card">
@@ -101,21 +93,18 @@
     </div>
   </section>
 
-  <!-- ========== CONTACT SECTION ========== -->
+  <!-- CONTACT -->
   <section id="contact" class="page-section">
-    <div class="section-inner">
+    <div class="section-box">
       <h2 class="section-title">Contact</h2>
-      <div class="contact-box">
-        <p>Want to say hello?</p>
-        <p>Email: <span class="highlight">leccgamesandapps@gmail.com</span></p>
-        <p>More contact options coming soon.</p>
-      </div>
+      <p>Want to say hello?</p>
+      <p class="highlight">leccgamesandapps@gmail.com</p>
+      <p>More contact options coming soon.</p>
     </div>
   </section>
 
-  <!-- Footer -->
   <footer class="footer">
-    <p class="small">LEWEBSITE © 2026 • Minecraft Style Theme</p>
+    <p>LEWEBSITE © 2026 • Minecraft Style Theme</p>
   </footer>
 
   <script src="js/main.js"></script>
