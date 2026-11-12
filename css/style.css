@@ -201,6 +201,12 @@ body {
   box-shadow: inset -3px -3px 0 #5d3a1a, inset 3px 3px 0 #a67c52, 3px 3px 0 #222;
 }
 
+.mc-btn.small-btn {
+  font-size: 10px;
+  padding: 12px 16px;
+  min-width: 140px;
+}
+
 .mc-btn:hover {
   transform: translateY(-3px);
   filter: brightness(1.1);
@@ -301,6 +307,43 @@ body {
   font-weight: bold;
 }
 
+/* About Buttons */
+.about-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+/* Legal Pages */
+.legal-box {
+  max-width: 520px;
+  text-align: left;
+}
+
+.legal-content {
+  margin-bottom: 24px;
+}
+
+.legal-content h3 {
+  font-size: 13px;
+  color: var(--gold);
+  margin: 20px 0 8px;
+}
+
+.legal-content p {
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.55;
+  margin-bottom: 10px;
+  color: #ddd;
+}
+
+.legal-content strong {
+  color: #fff;
+}
+
 /* Projects */
 .projects-grid {
   display: flex;
@@ -370,6 +413,11 @@ body {
   }
 
   .btn-group {
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .about-buttons {
     flex-direction: row;
     justify-content: center;
   }

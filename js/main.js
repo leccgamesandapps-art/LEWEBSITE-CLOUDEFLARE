@@ -20,6 +20,7 @@ function showSection(id) {
   const target = document.getElementById(id);
   if (target) target.classList.add('active');
 
+  // Update nav active state (only for main pages)
   document.querySelectorAll('.nav-btn').forEach(btn => {
     btn.classList.toggle('active', btn.dataset.section === id);
   });
